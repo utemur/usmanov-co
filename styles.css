@@ -1,0 +1,204 @@
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100vh; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #e5e5e5;
+  padding: 24px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.is-expanded {
+  padding: 0;
+  background: #1a1a1a;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url(assets/full-image.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+body.is-expanded::after {
+  opacity: 1;
+}
+
+.page {
+  max-width: 1150px;
+  width: 100%;
+  margin-top: 4vh;
+  transition: max-width 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              margin 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              padding 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              width 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              height 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s;
+}
+
+body.is-expanded .page {
+  position: fixed;
+  inset: 0;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.is-expanded .page::after {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  animation: darkenCenter 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) 1.5s forwards;
+}
+
+@keyframes darkenCenter {
+  to { opacity: 1; }
+}
+
+.welcome-overlay {
+  display: none;
+  position: absolute;
+  inset: 12%;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  pointer-events: none;
+}
+
+body.is-expanded .welcome-overlay {
+  display: flex;
+}
+
+.welcome-overlay .welcome-title {
+  margin: 0 0 24px 0;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.welcome-overlay .welcome-body {
+  max-width: 42ch;
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.6;
+}
+
+.welcome-overlay .welcome-body .typewriter-cursor {
+  visibility: hidden;
+}
+
+.welcome-overlay .typewriter-cursor {
+  display: inline-block;
+  margin-left: 1px;
+  color: #fff;
+  font-weight: 300;
+  animation: blink 0.9s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  transition: aspect-ratio 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              width 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              height 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              gap 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              max-width 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s,
+              max-height 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s;
+}
+
+body.is-expanded .grid {
+  width: 100%;
+  height: 100%;
+  max-width: min(calc(100vh * 4 / 3), 100%);
+  max-height: min(calc(100vw * 3 / 4), 100%);
+  aspect-ratio: 4 / 3;
+  gap: 24px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
+  transition: gap 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1s;
+}
+
+body.is-expanded .col {
+  gap: 24px;
+}
+
+.col-2 {
+  justify-content: center;
+}
+
+.col-3 {
+  justify-content: space-between;
+}
+
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  width: 100%;
+  flex-shrink: 0;
+  background-image: url(assets/full-image.jpg);
+  background-size: 400% 300%;
+  background-repeat: no-repeat;
+  background-color: #ccc;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.85s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 0.85s cubic-bezier(0.25, 0.1, 0.25, 1),
+              border-radius 0.85s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.85s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+body.is-expanded .card {
+  transform: scale(0.4);
+  opacity: 0;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+
+.card-1 { background-position: 0% 0%; }
+.card-2 { background-position: 0% 50%; }
+.card-3 { background-position: 25% 0%; }
+.card-4 { background-position: 25% 50%; }
+.card-5 { background-position: 25% 100%; }
+.card-6 { background-position: 50% 0%; }
+.card-7 { background-position: 50% 50%; }
+.card-8 { background-position: 75% 0%; }
+.card-9 { background-position: 75% 50%; }
+.card-10 { background-position: 75% 100%; }

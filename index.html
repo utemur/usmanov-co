@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>archon</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <div class="welcome-overlay" aria-hidden="true">
+      <p class="welcome-title"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
+      <p class="welcome-body"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
+    </div>
+    <div class="grid">
+      <div class="col col-2">
+        <div class="card card-1"></div>
+        <div class="card card-2"></div>
+      </div>
+      <div class="col col-3">
+        <div class="card card-3"></div>
+        <div class="card card-4"></div>
+        <div class="card card-5"></div>
+      </div>
+      <div class="col col-2">
+        <div class="card card-6"></div>
+        <div class="card card-7"></div>
+      </div>
+      <div class="col col-3">
+        <div class="card card-8"></div>
+        <div class="card card-9"></div>
+        <div class="card card-10"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var titleTyped = document.querySelector('.welcome-title .typed');
+      var bodyTyped = document.querySelector('.welcome-body .typed');
+      var titleCursor = document.querySelector('.welcome-title .typewriter-cursor');
+      var bodyCursor = document.querySelector('.welcome-body .typewriter-cursor');
+
+      function typeWriter(el, cursor, text, delay, done) {
+        var i = 0;
+        el.textContent = '';
+        cursor.style.visibility = 'visible';
+        function type() {
+          if (i < text.length) {
+            el.textContent += text[i];
+            i++;
+            setTimeout(type, delay);
+          } else if (done) {
+            cursor.style.visibility = 'hidden';
+            done();
+          }
+        }
+        type();
+      }
+
+      function runWelcomeSequence() {
+        titleTyped.textContent = '';
+        bodyTyped.textContent = '';
+        bodyCursor.style.visibility = 'hidden';
+        typeWriter(titleTyped, titleCursor, 'Welcome to Usmanov&co', 55, function () {
+          typeWriter(bodyTyped, bodyCursor, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.', 35, function () {});
+        });
+      }
+
+      document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          e.stopPropagation();
+          document.body.classList.add('is-expanded');
+          setTimeout(runWelcomeSequence, 2300);
+        });
+      });
+      document.body.addEventListener('click', function () {
+        if (document.body.classList.contains('is-expanded')) {
+          document.body.classList.remove('is-expanded');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
