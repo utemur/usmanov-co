@@ -125,10 +125,28 @@ body.is-expanded .welcome-overlay {
 }
 
 .welcome-flip-back {
+  transform: rotateY(180deg);
+}
+
+.welcome-flip-back-inner {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: rotateY(180deg);
+}
+
+.welcome-flip-back .welcome-arrow {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  z-index: 2;
+}
+
+.welcome-arrow-back {
+  pointer-events: none;
 }
 
 .welcome-contact {
@@ -191,11 +209,11 @@ body.is-expanded .welcome-overlay {
   right: 10%;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,6 +224,7 @@ body.is-expanded .welcome-overlay {
   font: inherit;
   appearance: none;
   -webkit-appearance: none;
+  z-index: 2;
 }
 
 .welcome-arrow.visible {
@@ -214,10 +233,11 @@ body.is-expanded .welcome-overlay {
 
 .welcome-arrow span {
   color: #fff;
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: 1.35rem;
+  font-weight: 400;
   line-height: 1;
-  margin-left: 2px;
+  margin-left: 3px;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
 .grid {
