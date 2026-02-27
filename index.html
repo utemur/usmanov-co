@@ -9,8 +9,21 @@
 <body>
   <div class="page">
     <div class="welcome-overlay" aria-hidden="true">
-      <p class="welcome-title"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
-      <p class="welcome-body"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
+      <div class="welcome-flip-container" id="welcomeFlip">
+        <div class="welcome-flip-front">
+          <div class="welcome-content">
+            <p class="welcome-title"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
+            <p class="welcome-body"><span class="typed"></span><span class="typewriter-cursor">|</span></p>
+          </div>
+          <button type="button" class="welcome-arrow" aria-label="Далее"><span>&gt;</span></button>
+        </div>
+        <div class="welcome-flip-back">
+          <div class="welcome-contact">
+            <p class="welcome-contact-line">Email: ceo@usmanovandco.com</p>
+            <p class="welcome-contact-line">Telegram: @telegram</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="grid">
       <div class="col col-2">
@@ -62,9 +75,17 @@
         bodyTyped.textContent = '';
         bodyCursor.style.visibility = 'hidden';
         typeWriter(titleTyped, titleCursor, 'Welcome to Usmanov&co', 55, function () {
-          typeWriter(bodyTyped, bodyCursor, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.', 35, function () {});
+          typeWriter(bodyTyped, bodyCursor, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.', 35, function () {
+          document.querySelector('.welcome-arrow').classList.add('visible');
+        });
         });
       }
+
+      document.getElementById('welcomeFlip').addEventListener('click', function (e) {
+        if (e.target.closest('.welcome-arrow') && e.target.closest('.welcome-arrow').classList.contains('visible')) {
+          document.getElementById('welcomeFlip').classList.add('flipped');
+        }
+      });
 
       document.querySelectorAll('.card').forEach(function (card) {
         card.addEventListener('click', function (e) {
@@ -72,11 +93,6 @@
           document.body.classList.add('is-expanded');
           setTimeout(runWelcomeSequence, 2300);
         });
-      });
-      document.body.addEventListener('click', function () {
-        if (document.body.classList.contains('is-expanded')) {
-          document.body.classList.remove('is-expanded');
-        }
       });
     })();
   </script>
